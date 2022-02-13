@@ -4,13 +4,13 @@ heard of trees?, trees have a unique structure of root and branches, and trees i
 <h2 align = "center">Some Terminology</h2>
 This is a Tree
 
-![Tree.png](Tree.png)
+![Tree.png](pictures/Tree.png)
 
 <h3 align = "center">The difference between trees and linked lists</h3>
 
 As you can see a tree is composed of nodes each of these nodes has a value and pointer/s pointing to another node/s, and we have seen this kind of data structure before mainly in linked lists, but trees differ from linked list because tree represent a hierarchical structures and linked lists represent a linear structure.
 
-![Singly-Linked-List1.png](Singly-Linked-List1.png)
+![Singly-Linked-List1.png](pictures/Singly-Linked-List1.png)
 
 now to a really boring but important part Terminology
 1. Parents : straightforward any node with children, examples of parents in the above tree include {20,30,16,12}
@@ -39,7 +39,8 @@ This kind of tree implies the number two, each node is at most connect to two ot
 |:-------------:|:--------:|:-----------------:|:-----------:|:-------------------:|
 | **Searching** | **O(N)** | **O($log(n)$)** |  **O(N)**   | **O($log_2(n)$)\*** |
 |  **Adding**   | **O(1)** |     **O(N)**      |  **O(1)**   | **$O(log_2(n))$\*** |
-| **Deleting**  | **O(1)** |     **O(N)**      |  **O(1)**   |     **O(H)\****     |
+| **Deleting**  | **O(1)** |     **O(N)**      |  **O(1)**   |     **O(H)\****     |  
+
 \* If the tree has a degenerate form then the Big O Notation for every operation is **O(N)**
 \** H is the height of the tree 
 <br></br>
@@ -69,7 +70,7 @@ To further understand binary trees, we must know their shapes.
  There can be three way of doing such traversal.
 taking this tree as an example
 
- ![binary-search-tree.png](binary-search-tree.png)
+ ![binary-search-tree.png](pictures/binary-search-tree.png)
 
 1. Pre-Order traversal, the order in which this traversal goes is
  root -> left -> node
