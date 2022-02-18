@@ -4,7 +4,7 @@ think about it we can't represent data without representing the relation between
 ## Some Terminology 
 Trees consist of nodes, each node must has two component the first being a value and the second being a pointer/s to other nodes.
 
-![node/s](lecture-1/pictures/node.png)
+![node/s](https://github.com/Walid-Kh/IEEE-CUSB/blob/master/lecture-1/pictures/node.png)
 
 Each node has something of a title that describe its relation with other nodes. 
 
@@ -18,7 +18,7 @@ Here is the definition of each term
 
 
   
-![Tree](lecture-1/pictures/Tree.png)
+![Tree](https://github.com/Walid-Kh/IEEE-CUSB/blob/master/lecture-1/pictures/Tree.png)
 
 
 ## Type of Trees 
@@ -32,7 +32,7 @@ Today we'll discuss the the implementation properties of these trees
 Binary search tree are Tree-based data structure, where each node connect to two other nodes, for each node the left child must has a either a smaller or equal value to its parent, and subsequently the right child must has a larger value than its parent. 
 This property makes binary search possible and thus reduces the complexity for searching in that Tree  
 
-![binary-search-tree](lecture 1/pictures/binary-search-tree.png)
+![binary-search-tree](https://github.com/Walid-Kh/IEEE-CUSB/blob/master/lecture-1/pictures/binary-search-tree.png)
 <br>
 
 |     OP/DS     |  Array   |   sorted Array    | linked list | Binary Search Trees |
@@ -85,10 +85,10 @@ deletion is much more complicated, deletion requires us to consider what will oc
 the target node could be connected to 
 1. no other node (a leaf) 
 in which case that node can be deleted and parent's pointer reset with no farther consequences
-![deleting a leaf](lecture-1/pictures/deleting-a-leaf.png)
+![deleting a leaf](https://github.com/Walid-Kh/IEEE-CUSB/blob/master/lecture-1/pictures/deleting-a-leaf.png)
 2. connected one sub-tree
 in that case we must reset the parent's pointer so that it connects to that sub-tree and then delete the node
-![deleting one connecting node](lecture-1/pictures/deleting-one-connecting-node.png)
+![deleting one connecting node](https://github.com/Walid-Kh/IEEE-CUSB/blob/master/lecture-1/pictures/deleting-one-connecting-node.png)
 3. connected to two other sub-trees 
 in that case, we must search for a replacement for our node which will be either 
 <ul>
@@ -97,6 +97,6 @@ in that case, we must search for a replacement for our node which will be either
 </ul>
 and then we must call the remove function to delete the replacement.
 
-![deleting a node with two connected subtrees](lecture-1/pictures/deleting-a-node-with-two-connected-subtrees.png)
+![deleting a node with two connected subtrees](https://github.com/Walid-Kh/IEEE-CUSB/blob/master/lecture-1/pictures/deleting-a-node-with-two-connected-subtrees.png)
  
-[Implementation](file:///home/kofts/Downloads/IEEE-CUSB/binarySearchTree.cpp)
+[Implementation](https://github.com/Walid-Kh/IEEE-CUSB/blob/master/lecture-1/binarySearchTree.cpp)
