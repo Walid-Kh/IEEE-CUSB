@@ -44,13 +44,13 @@ This property makes binary search possible and thus reduces the complexity for s
 \* If the tree has a degenerate form then the Big O Notation for every operation is **O(N)**
 \** H is the height of the tree
 
-### Implementation 
+#### Implementation 
 any implementation of any binary tree must consider the following actions/function and all of these actions share one thing in particular they're all recursive function
 - 🖊️ Inserting a node 🖊️ 
 - ❌ Deleting a node ❌	
 - 🔍️ Searching for a node 🔍️
 
-#### 🖊️ Inserting a node 🖊️  
+##### 🖊️ Inserting a node 🖊️  
 values to be inserted must finds their correct position in the binary search tree so that the tree maintains its functionality. 
 so to do that we have to do two things 
 1. Searching for an appropriate spot
@@ -80,7 +80,7 @@ return root;
 ```
 
 
-#### ❌ Deleting a node ❌
+##### ❌ Deleting a node ❌
 deletion is much more complicated, deletion requires us to consider what will occur for the sub-tree connected the target node. 
 the target node could be connected to 
 1. no other node (a leaf) 
