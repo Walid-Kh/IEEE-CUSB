@@ -84,6 +84,7 @@ const Node *BST::search(int x)
 }
 const Node *BST::search(const Node *root, int x)
 {
+    // try and catch blocks in case the value isn't found
     try
     {
         if (root == nullptr)
@@ -150,6 +151,7 @@ Node *BST::remove(Node *&root, int x)
 }
 int main()
 {
+    //remember to debug the code to show its validity 
     BST *a = new BST;
     a->insert(10);
     a->insert(5);
