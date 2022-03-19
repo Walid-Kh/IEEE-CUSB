@@ -107,26 +107,25 @@ to search for a node we have perform a binary search where we ignore the any sid
  4. leaf // return nullptr
 
 ```cpp
-const Node *BST::search(const Node *root, int x)
-{
-// try and catch blocks in case the value isn't found
-	try
-	{
-	if (root == nullptr)
-		return nullptr;
-	if (root->value == x)
-	{
-		const Node *res = root;
-		return res;
-	}
-	else if (x > root->value)
-		search(root->right, x);
-	else if (x <= root->value)
-		search(root->left, x);
-	}
-	catch (const std::exception &e)
-	{
-		return nullptr
+Node *search(Node *root, int x)
+ {
+ 	if (root == nullptr)
+ 		return nullptr;
+ 	else if (root->value == x)
+ 		return root;
+ 	else
+ 	{
+ 		Node* res;
+ 		switch(root->value >= x)
+ 		{
+ 			case 1:
+ 			res = search(root->left,x);
+			break;
+ 			case 0:
+ 			res = search(root->right,x);
+			break;
+ 		};
+ 	return res;
 	}
 }
 ```
