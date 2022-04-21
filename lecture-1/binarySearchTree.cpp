@@ -3,6 +3,7 @@
 #include <stack>
 #include <queue>
 #include <set>
+#include <math.h>
 using namespace std;
 struct Node
 {
@@ -23,7 +24,7 @@ class BST
       destroyTree(root->right);
       root->left = nullptr;
       root->right = nullptr;
-      delete root; 
+      delete root;
     }
   }
 
@@ -65,7 +66,7 @@ class BST
     else
     {
       // NO CHILD
-      if (root->left == nullptr and root->right == nullptr) // leaf
+      if (root->left == nullptr && root->right == nullptr) // leaf
       {
         delete root;
         root = nullptr;
@@ -97,26 +98,69 @@ class BST
   }
   Node *search(Node *root, int x)
   {
-    // try and catch blocks in case the value isn't found
-    try
+    if (root == nullptr)
+      return nullptr;
+    else if (root->value == x)
+      return root;
+    else
     {
-      if (root == nullptr)
-        return nullptr;
-      if (root->value == x)
+      Node *res;
+      switch (root->value >= x)
       {
-        return root;
-      }
-      else if (x > root->value)
-        search(root->right, x);
-      else if (x <= root->value)
-        search(root->left, x);
-    }
-    catch (const std::exception &e)
-    {
-      return NULL;
+      case 1:
+        res = search(root->left, x);
+        break;
+      case 0:
+        res = search(root->right, x);
+        break;
+      };
+      return res;
     }
   }
-
+  void deleteLeaves (Node*& ptr)
+  {
+    if (!ptr) return; 
+    if (!ptr->left && !ptr->right)
+    {
+      delete ptr; 
+      ptr = nullptr; 
+      return; 
+    }
+    Node* left = ptr->left; 
+    Node* right = ptr->right; 
+    deleteLeaves(left);
+    deleteLeaves(right);
+    ptr->left = left; 
+    ptr->right = right; 
+  }
+  void printPaths(Node* ptr,vector<int> list = {})
+  {
+    if (!ptr) return; 
+    list.push_back(ptr->value); 
+    if(!ptr->left && !ptr->right)
+    {
+      for(int i = 0; i < list.size(); i++)
+    {
+      cout << list[i] << " ";
+    }
+      cout << endl; 
+      return; 
+    }
+    printPaths(ptr->left, list);
+    printPaths(ptr->right, list);
+  }
+  int height (Node* ptr)
+  {
+    if (!ptr)
+      return 0;
+    return 1 + max(height(ptr->left), height(ptr->right));  
+  }
+  bool isBalanced (Node* ptr)
+  {
+    if (!ptr)
+      return true;
+    return !(abs(height(ptr->left)-height(ptr->right))>1); 
+  }
 public:
   BST()
   {
@@ -138,30 +182,180 @@ public:
   {
     return root;
   }
-  void printDFS();
   Node *search(int x)
   {
     return search(this->root, x);
   }
-  int height(Node *node);
-};
+  int reLessThan(Node *ptr, int data)
+  {
+    if (!ptr)
+      return 0;
+    if (ptr->value < data)
+    {
+      return 1 + reLessThan(ptr->left, data) + reLessThan(ptr->right, data);
+    }
+    else
+      return reLessThan(ptr->left, data) + reLessThan(ptr->right, data);
+  }
+  int countNodes(Node *ptr)
+  {
+    if (!ptr)
+      return 0;
+    else
+      return 1 + countNodes(ptr->left) + countNodes(ptr->right);
+  }
+  int sumOfTree(Node *ptr)
+  {
+    if (!ptr)
+      return 0;
+    else
+      return ptr->value + sumOfTree(ptr->left) + sumOfTree(ptr->right);
+  }
+  int noOfLeaves(Node *ptr)
+  {
+    if (!ptr)
+      return 0;
+    if (!ptr->left && !ptr->right)
+      return 1;
+    else
+      return noOfLeaves(ptr->left) + noOfLeaves(ptr->right);
+  }
 
+  int noOfLeavesOfEvenValues(Node *ptr)
+  {
+    if (!ptr)
+      return 0;
+    if (!ptr->left && !ptr->right)
+    {
+      if (ptr->value % 2 == 0)
+        return 1;
+      else
+        return 0;
+    }
+    else
+      return noOfLeavesOfEvenValues(ptr->left) + noOfLeavesOfEvenValues(ptr->right);
+  }
+  // int max()
+  // {
+  //   if (!this->root)
+  //   {
+  //     return -1;
+  //   }
+  //   Node *tra = this->root;
+  //   while (tra->right != nullptr)
+  //   {
+  //     tra = tra->right;
+  //   }
+  //   return tra->value;
+  // }
+  void printLessThan(Node *ptr, int data)
+  {
+    if (!ptr)
+    {
+      return;
+    }
+    else if (ptr->value < data)
+    {
+      cout << ptr->value << ' ';
+    }
+    printLessThan(ptr->left, data);
+    printLessThan(ptr->right, data);
+  }
+  bool allNodesEqualTo(int x)
+  {
+    int sum = 0;
+    queue<Node *> q;
+    q.push(this->root);
+    while (!q.empty())
+    {
+      Node *x = q.front();
+      q.pop();
+      if (x->left)
+        q.push(x->left);
+      if (x->right)
+        q.push(x->right);
+      sum += x->value;
+    }
+    return sum == x;
+  }
+  void reverse(Node*ptr )
+  {
+    if (ptr)
+    {
+      Node *left = ptr->left;
+      Node *right = ptr->right;
+      ptr->left = right; 
+      ptr->right = left;  
+      reverse(ptr->left);
+      reverse(ptr->right);
+    }
+  }
+  static bool isMirror (Node* aT, Node* bT) 
+  {
+    if (!aT&&!bT)
+      return true;
+    if (!aT||!bT||aT->value != bT->value)
+      return false; 
+    return isMirror(aT->left,bT->right)&&isMirror(aT->right,bT->left);
+  }
+  void BFS()
+  {
+    if (!root)
+      return;
+    queue<Node *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+      Node *x = q.front();
+      q.pop();
+      if (x->left)
+        q.push(x->left);
+      if (x->right)
+        q.push(x->right);
+      cout << x->value << " "; 
+    }
+  }
+  void deleteLeaves ()
+  {
+    deleteLeaves(root);
+  }
+  void printPaths()
+  {
+    printPaths(this->root); 
+  }
+  int height ()
+  {
+    return height(root);
+  } 
+  bool isBalanced()
+  {
+    return isBalanced(root);
+  }
+};
 int main()
 {
-  //remember to debug the code to show its validity
+  // remember to debug the code to show its validity
   BST *a = new BST;
-  a->insert(10);
-  a->insert(5);
-  a->insert(4);
-  a->insert(6);
-  a->insert(15);
-  a->insert(12);
-  a->insert(16);
-  a->insert(11);
-  a->insert(14);
-  a->insert(13);
-  a->remove(12);
+  a->insert(5); 
+  a->insert(3); 
+  a->insert(7); 
+  a->insert(1); 
+  a->insert(4); 
+  a->insert(6); 
+  a->insert(8); 
+  a->printPaths();
+  BST *b = new BST;
+  for (int i = 0; i < 4;i++)
+  {
+    b->insert(i); 
+  }
+  string balanced = b->isBalanced()? "Balanced" : "Not balanced"; 
+  cout << balanced << endl; 
+
   delete a;
-  set<int> x;
+
   return 0;
+  // int x = 5;
+  // addone(x);
+  // cout << x << endl;
 }
